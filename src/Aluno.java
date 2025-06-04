@@ -1,4 +1,4 @@
-public class alunos {
+public class Aluno {
    
    
     private String nome;
@@ -8,7 +8,7 @@ public class alunos {
     private String plano;
 
 
-    public alunos(String nome, int idade, double peso, double altura, String plano) {
+    public Aluno(String nome, int idade, double peso, double altura, String plano) {
         this.nome = nome;
         this.idade = idade;
         this.peso = peso;

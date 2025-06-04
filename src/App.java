@@ -5,10 +5,10 @@
   public class App {
       public static void main(String[] args) throws Exception {
       Scanner ler = new Scanner (System.in);
-      ArrayList<alunos> listaAlunos = new ArrayList<>();
+      ArrayList<Aluno> listaAlunos = new ArrayList<>();
         
 
-      alunos aluno = new alunos(null, 0, 0, 0, null);
+      Aluno aluno = new Aluno(null, 0, 0, 0, null);
         aluno.setNome("Marcus Vinicius Couto Pasin");
         aluno.setIdade(18);
         aluno.setPeso(62.8);
@@ -54,7 +54,7 @@
             System.out.println("• Exclusive ");
             String plano = ler.nextLine();
 
-            alunos novoAluno = new alunos(nome, idade, peso, altura, plano);
+            Aluno novoAluno = new Aluno(nome, idade, peso, altura, plano);
             novoAluno.setAltura(altura);
 
             listaAlunos.add(novoAluno);
@@ -67,7 +67,7 @@
             if (listaAlunos.isEmpty()) {
               System.out.println("Nenhum aluno cadastrado.");
             } else {
-              for (alunos a : listaAlunos) {
+              for (Aluno a : listaAlunos) {
                 System.out.println("Nome: " + a.getNome());
                 System.out.println("Idade: " + a.getIdade());
                 System.out.println("Peso: " + a.getPeso());

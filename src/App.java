@@ -1,10 +1,16 @@
-  import java.util.ArrayList;
-  import java.util.Scanner;
-
+  import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
   public class App {
       public static void main(String[] args) throws Exception {
       Scanner ler = new Scanner (System.in);
+     
+
+
+Connection conn = Conexao.conectar();
+
       ArrayList<Aluno> listaAlunos = new ArrayList<>();
         
 
@@ -14,7 +20,8 @@
         aluno.setPeso(62.8);
         aluno.setAltura(1.80);
         aluno.setPlano("Exclusive");
-
+        AlunoDAO alunoDAO = new AlunoDAO();
+        alunoDAO.inserirAluno(aluno);
 
 
       do {
@@ -59,46 +66,40 @@
 
             listaAlunos.add(novoAluno);
             System.out.println("Aluno cadastrado com suecsso!");
-
             break;
 
-          case 2:
-            System.out.println("=== Exibir Informações ===");
-            if (listaAlunos.isEmpty()) {
-              System.out.println("Nenhum aluno cadastrado.");
-            } else {
-              for (Aluno a : listaAlunos) {
-                System.out.println("Nome: " + a.getNome());
-                System.out.println("Idade: " + a.getIdade());
-                System.out.println("Peso: " + a.getPeso());
-                System.out.println("Altura: " + a.getAltura());
-                System.out.println("Plano: " + a.getPlano());
-                System.out.println("-------------------------");
-              }
-            }
-            break;
+         case 2:
+    System.out.println("=== Exibir Informações ===");
+    AlunoDAO alunoDAO2 = new AlunoDAO();
+    List<Aluno> alunos = alunoDAO.listarAlunos();
+
+    if (alunos.isEmpty()) {
+        System.out.println("Nenhum aluno cadastrado no banco.");
+    } else {
+        for (Aluno a : alunos) {
+            System.out.println("Nome: " + a.getNome());
+            System.out.println("Idade: " + a.getIdade());
+            System.out.println("Peso: " + a.getPeso());
+            System.out.println("Altura: " + a.getAltura());
+            System.out.println("Plano: " + a.getPlano());
+            System.out.println("-------------------------");
+        }
+    }
+    break;
 
           case 3:
+          
             System.out.println("=== Excluir Aluno ===");
             if (listaAlunos.isEmpty()) {
               System.out.println("Nenhum aluno cadastrado.");
             } else {
               System.out.println("Digite o nome do aluno a ser excluído:");
               String nomeExcluir = ler.nextLine();
-              boolean encontrado = false;
-              for (int i = 0; i < listaAlunos.size(); i++) {
-                if (listaAlunos.get(i).getNome().equalsIgnoreCase(nomeExcluir)) {
-                  listaAlunos.remove(i);
-                  encontrado = true;
-                  System.out.println("Aluno excluído com sucesso!");
-                  break;
-                }
-              }
-              if (!encontrado) {
-                System.out.println("Aluno não encontrado.");
-              }
+              
+              AlunoDAO AlunoDAOExcluir = new AlunoDAO();
+              AlunoDAOExcluir.excluirAluno(nomeExcluir);
+              break;
             }
-            break;
 
           default:
             System.out.println("Opção inválida. Tente novamente.");
